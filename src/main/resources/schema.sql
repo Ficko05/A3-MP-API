@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS student;
+
+CREATE TABLE student
+(
+    id LONG PRIMARY KEY,
+    name VARCHAR(25) NOT NULL,
+    mail VARCHAR(25) NOT NULL
+
+);
