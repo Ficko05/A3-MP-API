@@ -1,4 +1,4 @@
-package as.ff.nl.a3mpapi.exceptions;
+package as.ff.nl.a3mpapi.Rest.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

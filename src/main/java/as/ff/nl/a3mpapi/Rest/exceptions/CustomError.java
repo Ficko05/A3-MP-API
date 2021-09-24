@@ -1,4 +1,4 @@
-package as.ff.nl.a3mpapi.exceptions;
+package as.ff.nl.a3mpapi.Rest.exceptions;
 
 
 // inspired by Java Guides

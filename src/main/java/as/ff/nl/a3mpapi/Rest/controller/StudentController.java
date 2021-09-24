@@ -1,4 +1,4 @@
-package as.ff.nl.a3mpapi.controller;
+package as.ff.nl.a3mpapi.Rest.controller;
 
 // You need to import hateoas, also as Maven dependency
 // Spring Boot can do this for you
@@ -8,9 +8,9 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
-import as.ff.nl.a3mpapi.exceptions.StudentNotFoundException;
-import as.ff.nl.a3mpapi.model.Student;
-import as.ff.nl.a3mpapi.repository.StudentRepository;
+import as.ff.nl.a3mpapi.Rest.exceptions.StudentNotFoundException;
+import as.ff.nl.a3mpapi.Rest.model.Student;
+import as.ff.nl.a3mpapi.Rest.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;

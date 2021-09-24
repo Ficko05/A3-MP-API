@@ -1,4 +1,4 @@
-package as.ff.nl.a3mpapi.model;
+package as.ff.nl.a3mpapi.Rest.model;
 
 
 import lombok.Data;
