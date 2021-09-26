@@ -2,12 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <!-- lookup parent from repository -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.4</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <version>2.5.5</version>
+        <relativePath/>
     </parent>
+
     <groupId>as.ff.nl</groupId>
     <artifactId>A3-MP-API</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -18,7 +20,7 @@
 
         <!-- gRPC proto buf -->
         <protobuf.version>3.14.0</protobuf.version>
-        <protobuf-plugin.version>0.6.1</protobuf-plugin.version>
+        <protobuf-plugin.version>1.41.0</protobuf-plugin.version>
         <grpc.version>1.35.0</grpc.version>
 
     </properties>
@@ -47,6 +49,8 @@
             <optional>true</optional>
         </dependency>
         <!-- Grpc -->
+
+        <!--
         <dependency>
             <groupId>net.devh</groupId>
             <artifactId>grpc-spring-boot-starter</artifactId>
@@ -58,24 +62,24 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
+        -->
+        <!-- dependencies added to enable grpc -->
         <dependency>
             <groupId>io.grpc</groupId>
-            <artifactId>grpc-netty-shaded</artifactId>
-            <scope>runtime</scope>
+            <artifactId>grpc-netty</artifactId>
+            <version>1.16.1</version>
         </dependency>
+
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-protobuf</artifactId>
+            <version>1.16.1</version>
         </dependency>
+
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-stub</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.google.protobuf</groupId>
-            <artifactId>protobuf-java-util</artifactId>
-
+            <version>1.16.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.tomcat</groupId>
@@ -83,12 +87,6 @@
             <version>6.0.53</version>
             <scope>provided</scope> <!-- not needed at runtime -->
         </dependency>
-
-
-
-
-
-
 
         <dependency>
             <groupId>com.h2database</groupId>
