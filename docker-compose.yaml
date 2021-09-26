@@ -1,4 +1,5 @@
 # Soap Server
+
 # Rest Server
 # gRpc Server
 
@@ -8,3 +9,29 @@
 # Frontend
 
 # Db
+
+
+
+version: "3"
+services:
+  soap_server:
+    hostname: soap-server
+    ports:
+    - "8082:8082"
+    build: 
+      context: ./ClassService
+      dockerfile: Dockerfile
+
+  soap_client:
+    hostname: soap-client
+    depends_on:
+      - "soap_server"
+    ports:
+    - "8083:8083"
+    build: 
+      context: ./ClassClient
+      dockerfile: Dockerfile
+    volumes:
+      - c:/temp:/home/logs
+
+# docker-compose --env-file ../.env.local -f docker-compose.local.yml up --build -d
