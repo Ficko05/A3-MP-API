@@ -1,9 +1,18 @@
 DROP TABLE IF EXISTS student;
+DROP TABLE IF EXISTS subject;
 
 CREATE TABLE student
 (
     id LONG PRIMARY KEY,
     name VARCHAR(25) NOT NULL,
     mail VARCHAR(25) NOT NULL
+
+);
+
+CREATE TABLE subject
+(
+    id LONG PRIMARY KEY,
+    name VARCHAR(25) NOT NULL,
+    classroom VARCHAR(25) NOT NULL
 
 );

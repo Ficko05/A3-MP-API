@@ -4,3 +4,6 @@ insert into student(id, name, mail) values(103, 'Caroline', 'ca@mail.dk');
 insert into student(id, name, mail) values(104, 'Daniel', 'da@mail.dk');
 
 
+insert into subject(id, name, classroom) values(1, 'System Integration', '2.62');
+insert into subject(id, name, classroom) values(2, 'LSD', '2.62');
+insert into subject(id, name, classroom) values(3, 'Test', '2.62');
