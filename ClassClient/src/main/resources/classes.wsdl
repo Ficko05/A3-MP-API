@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://spring.io/guides/gs-producing-web-service" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://spring.io/guides/gs-producing-web-service" targetNamespace="http://spring.io/guides/gs-producing-web-service">
+  <wsdl:types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://spring.io/guides/gs-producing-web-service">
+
+    <xs:element name="getClassRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAllClassesRequest">
+        <xs:complexType>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAllClassesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="schoolClass" type="tns:schoolClass"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getClassResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="schoolClass" type="tns:schoolClass"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="schoolClass">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="ects" type="xs:int"/>
+            <xs:element name="campus" type="xs:string"/>
+            <xs:element name="language" type="xs:string"/>
+            <xs:element name="teacher" type="tns:teacher"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="teacher">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="email" type="xs:string"/>
+            <xs:element name="age" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getClassRequest">
+    <wsdl:part element="tns:getClassRequest" name="getClassRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllClassesRequest">
+    <wsdl:part element="tns:getAllClassesRequest" name="getAllClassesRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getClassResponse">
+    <wsdl:part element="tns:getClassResponse" name="getClassResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllClassesResponse">
+    <wsdl:part element="tns:getAllClassesResponse" name="getAllClassesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ClassesPort">
+    <wsdl:operation name="getClass">
+      <wsdl:input message="tns:getClassRequest" name="getClassRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getClassResponse" name="getClassResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllClasses">
+      <wsdl:input message="tns:getAllClassesRequest" name="getAllClassesRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getAllClassesResponse" name="getAllClassesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ClassesPortSoap11" type="tns:ClassesPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getClass">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getClassRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getClassResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllClasses">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getAllClassesRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAllClassesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ClassesPortService">
+    <wsdl:port binding="tns:ClassesPortSoap11" name="ClassesPortSoap11">
+      <soap:address location="http://localhost:8082/ws"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
