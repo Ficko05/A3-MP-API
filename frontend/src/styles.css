@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+  --maxbluegreen: #59C3C3;
+  --platinum: #EBE9E9;
+  --darksienna: #230903;
+  --yaleblue: #084B83;
+  --blush: #DB5375;
+}
+
+body {
+  background-color: var(--platinum);
+  font-family: "Neue Helvetica", Helvetica, sans-serif;
+
+}
+
+
+router-outlet {
+  margin: 1rem;
+  float: left;
+
+}
+
+
+.dg-navbar {
+  background-color: var(--maxbluegreen);
+}

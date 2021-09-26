@@ -1,0 +1,15 @@
+<p>students works!</p>
+
+<table ngClass="table">
+  <thead>
+      <th>Name</th>
+      <th>Size</th>
+  </thead>
+  <tbody>
+      <tr *ngFor="let student of students" [routerLink]="['/student', student.id]">
+
+          <td>{{student.sname}}</td>
+          <td>{{student.smail}}</td>
+      </tr>
+  </tbody>
+</table>

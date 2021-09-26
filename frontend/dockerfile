@@ -1,0 +1,28 @@
+# base image
+FROM node:14.15-alpine as node-angular-cli
+
+#Linux setup
+RUN apk update \
+  && apk add --update alpine-sdk \
+  && apk add curl \
+  && apk del alpine-sdk \
+  && rm -rf /tmp/* /var/cache/apk/* *.tar.gz ~/.npm \
+  && npm cache verify \
+  && sed -i -e "s/bin\/ash/bin\/sh/" /etc/passwd
+
+# set working directory
+WORKDIR /app
+
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
+
+# install and cache app dependencies
+COPY package.json /app/package.json
+RUN npm install
+RUN npm install -g @angular/cli@11.2.14
+
+# add app
+COPY . /app
+
+# start app
+CMD ng serve --configuration production --proxy-config proxy.config.json --host 0.0.0.0 --disableHostCheck
