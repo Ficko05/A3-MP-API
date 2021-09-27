@@ -22,8 +22,6 @@ public class StudentServiceImpl extends StudentServiceGrpc.StudentServiceImplBas
       try {
           Student student = studentDao.findById(studentId);
 
-
-
          StudentResponse studentResponse = StudentResponse.newBuilder()
                   .setId(studentId)
                  .setName(student.getName())
@@ -35,6 +33,7 @@ public class StudentServiceImpl extends StudentServiceGrpc.StudentServiceImplBas
          responseObserver.onCompleted();
 
       }catch (Exception e){
+          System.out.println(e);
 
       }
     }
