@@ -62,7 +62,7 @@ public class SubjectController {
     {
         Subject savedSubject = repo.save(subject);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(savedSubject.getId()).toUri();
+                .buildAndExpand(savedSubject.getSubject_id()).toUri();
         return ResponseEntity.created(location).build();
     }
 
@@ -72,7 +72,7 @@ public class SubjectController {
         Optional<Subject> subjectOptional = repo.findById(id);
         if (!subjectOptional.isPresent())
             return ResponseEntity.notFound().build();
-        subject.setId(id);
+        subject.setSubject_id(id);
         repo.save(subject);
         return ResponseEntity.noContent().build();
     }

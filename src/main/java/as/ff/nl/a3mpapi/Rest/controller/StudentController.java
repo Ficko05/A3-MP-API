@@ -62,7 +62,7 @@ public class StudentController {
     {
         Student savedStudent = repo.save(student);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(savedStudent.getId()).toUri();
+                .buildAndExpand(savedStudent.getStudent_id()).toUri();
         return ResponseEntity.created(location).build();
     }
 
@@ -72,7 +72,7 @@ public class StudentController {
         Optional<Student> studentOptional = repo.findById(id);
         if (!studentOptional.isPresent())
             return ResponseEntity.notFound().build();
-        student.setId(id);
+        student.setStudent_id(id);
         repo.save(student);
         return ResponseEntity.noContent().build();
     }
