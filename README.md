@@ -62,3 +62,38 @@ should return:
 A Soap client can be run from the ClassClient project, and will run on port 8083.
 It curently sends a request for the "Testing" class and outputs the language to console.
 
+# gRPC server
+
+# Running the services
+Runnig gRPC service is in the "main" src folder (src/main/java/as/ff/nl/a3mpapi/grpc)
+To start the service run the StudentServer class in the server package.
+
+Requires port 8099 is not in use.
+
+Use BloomRPC to test the service, add the student.proto file.
+Example:
+
+ localhost:8099
+ 
+ Editor:
+ 
+ ```
+ {
+  "id": "103"
+}
+```
+
+Should return:
+
+```
+{
+  "id": "103",
+  "name": "Caroline",
+  "mail": "ca@mail.dk"
+}
+```
+
+There are 4 id's "101,102,103,104"
+Have Fun :)
+
+
