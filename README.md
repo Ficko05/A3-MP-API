@@ -15,9 +15,9 @@ Daniel Grønbjerg - cph-dg55
 
 # Running the services
 The services are implemented in separate projects.
-Thus each service has to be started individually on it's own port.
+Thus each service has to be started individually on it's own port. The ports required is 8060, 8082 and 8099.
+Each service needs to be started individually.
 
-Requires port 8080-808? are not in use.
 
 # SOAP server/client
 A simple POC of soap client/server in Java, using the classes of the semester.
