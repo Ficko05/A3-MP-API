@@ -1,6 +1,14 @@
 # A3-MP-API
 Mini Project 1 SI
 
+# participants
+
+Allan Bo Simonsen - cph-as484
+Nina Lisakowski - cph-nl163
+Filip Filipovic - cph-ff37
+Daniel Grønbjerg - cph-dg55
+
+
 # Running the services
 The services are implemented in separate projects.
 Thus each service has to be started individually on it's own port.
@@ -94,8 +102,6 @@ Should return:
 ```
 
 There are 4 id's "101,102,103,104"
-Have Fun :)
-
 
 # RESTful API (with SOAP)
 ## How to run the service
@@ -103,7 +109,8 @@ Running the RESTful API service A3MPAPIapplication class with the main method
 
 Alternatively you can run the Springboot initializer which should also be pointing at the main method
 
-It requires the PORT number 8060 and the H2 database should be up and running
+It requires the PORT number 8060 and a functional H2 database should be up and running.
+sql scripts are supplied to fill the h2 database.
 
 
 ## Walkthrough of endpoints
@@ -114,7 +121,7 @@ There is one endpoint which is a get endpoint. It is accessed through:
 localhost:8060/iplocator/{ip}
 ```
 This endpoint return a string containing the country and state of the supplied IP address.
-It is implemented with a SOAP service.
+It is implemented with a SOAP service, which takes the ip and returns the location..
 A return example for an IP address "79.142.224.239" could look like this:
 ```
 DK17
@@ -274,3 +281,165 @@ If a nonexisting ID is provided a status code 404 Not Found is thrown.
 
 ### Student
 
+#### GET - all
+The endpoint for this GET looks like below:
+```
+localhost:8060/students
+```
+This endpoint will return all the students available like below:
+```
+{
+  "_embedded" : {
+    "students" : [ {
+      "name" : "Alice",
+      "mail" : "al@mail.dk",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8060/students/101"
+        },
+        "student" : {
+          "href" : "http://localhost:8060/students/101"
+        },
+        "subjects" : {
+          "href" : "http://localhost:8060/students/101/subjects"
+        }
+      }
+    }, {
+      "name" : "Bob",
+      "mail" : "bo@mail.dk",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8060/students/102"
+        },
+        "student" : {
+          "href" : "http://localhost:8060/students/102"
+        },
+        "subjects" : {
+          "href" : "http://localhost:8060/students/102/subjects"
+        }
+      }
+    }, {
+      "name" : "Caroline",
+      "mail" : "ca@mail.dk",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8060/students/103"
+        },
+        "student" : {
+          "href" : "http://localhost:8060/students/103"
+        },
+        "subjects" : {
+          "href" : "http://localhost:8060/students/103/subjects"
+        }
+      }
+    }, {
+      "name" : "Daniel",
+      "mail" : "da@mail.dk",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8060/students/104"
+        },
+        "student" : {
+          "href" : "http://localhost:8060/students/104"
+        },
+        "subjects" : {
+          "href" : "http://localhost:8060/students/104/subjects"
+        }
+      }
+    } ]
+  },
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8060/students"
+    },
+    "profile" : {
+      "href" : "http://localhost:8060/profile/students"
+    }
+  },
+  "page" : {
+    "size" : 20,
+    "totalElements" : 4,
+    "totalPages" : 1,
+    "number" : 0
+  }
+}
+```
+#### GET - Specific student
+The endpoint for finding a specific student is as below:
+```
+localhost:8060/students/{id}
+```
+Here you insert a valid ID, this can be either 101 , 102, 103, 104, 105, 106, 107, 108 & 109.
+
+The endpoint with an ID of 101 will return this:
+```
+{
+  "name" : "Alice",
+  "mail" : "al@mail.dk",
+  "_links" : {
+    "all-students" : {
+      "href" : "http://localhost:8060/students/all"
+    },
+    "self" : {
+      "href" : "http://localhost:8060/students/101"
+    }
+  }
+}
+```
+
+If an nonexisting ID is provided an error code NOT FOUND with status 404 will be thrown.
+
+#### DELETE - Specific student
+For deleting a specific student it is done as below in Postman:
+```
+localhost:8060/students/{id}
+```
+When providing an existing ID the student will be deleted successfully and will return a status code 200.
+If a nonexisting ID is provided a status code 500 will be thrown.
+
+#### POST - student
+A student is created in Postman through this endpoint:
+```
+localhost:8060/students/
+```
+An example for what could be created could be like this:
+```
+{
+    "name": "Dora",
+    "email": "dora@email.com" 
+}
+```
+When creating a student then a successful return will look like below and with a status code 200:
+```
+{
+    "name": "Dora",
+    "email": "dora@email.com",
+    "_links": {
+        "self": {
+            "href": "http://localhost:8060/students/1"
+        },
+        "student": {
+            "href": "http://localhost:8060/students/1"
+        }
+    }
+}
+```
+
+An unsuccessful scenario will appear if you write a wrong name for a wrong field, this will throw a status code 400.
+
+#### PUT - Specific student
+The endpoint for editing a specific student looks like below:
+```
+localhost:8060/students/{id}
+```
+When editing a specific student it is done in Postman with an existing ID. This could be 101, 102, 103, 104, 105, 106, 107, 108, 109.
+
+An example for what could be edited for any student with a correct ID looks like below:
+```
+localhost:8060/students/101
+{
+    "name": "steffen",
+    "mail": "steffen@mail.com" 
+}
+```
+If a nonexisting ID is provided a status code 404 Not Found is thrown.
