@@ -18,7 +18,8 @@ public class StudentDao {
 
         // We can find a record in the database for a given id using the find method.
         // for the find method we have to provide our entity class and the id.
-        Student student = em.find(Student.class, studentId);
+        var id = Long.parseLong(studentId);
+        Student student = em.find(Student.class, id);
 
         // If there is no record found with the provided student id, then we throw a NoSuchElement exception.
         if(student == null){
