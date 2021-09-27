@@ -4,9 +4,13 @@ Mini Project 1 SI
 # participants
 
 Allan Bo Simonsen - cph-as484
+
 Nina Lisakowski - cph-nl163
+
 Filip Filipovic - cph-ff37
+
 Daniel Grønbjerg - cph-dg55
+
 
 
 # Running the services
