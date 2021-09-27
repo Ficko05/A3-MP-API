@@ -15,8 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
@@ -40,7 +42,7 @@ public class StudentController {
     {
         Optional<Student> student = repo.findById(id);
         if (!student.isPresent())
-            throw new StudentNotFoundException("id: " + id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "ENTITY NOT FOUND");
 
         EntityModel<Student> resource = EntityModel.of(student.get()); 						// get the resource
         WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retrieveAllStudents()); // get link

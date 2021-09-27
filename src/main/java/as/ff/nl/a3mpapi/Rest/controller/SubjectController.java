@@ -1,17 +1,22 @@
 package as.ff.nl.a3mpapi.Rest.controller;
 
 import as.ff.nl.a3mpapi.Rest.exceptions.SubjectNotFoundException;
+import as.ff.nl.a3mpapi.Rest.model.Student;
 import as.ff.nl.a3mpapi.Rest.model.Subject;
 import as.ff.nl.a3mpapi.Rest.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,7 +45,7 @@ public class SubjectController {
     {
         Optional<Subject> subject = repo.findById(id);
         if (!subject.isPresent())
-            throw new SubjectNotFoundException("id: " + id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "ENTITY NOT FOUND");
 
         EntityModel<Subject> resource = EntityModel.of(subject.get()); 						// get the resource
         WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retrieveAllSubjects()); // get link
