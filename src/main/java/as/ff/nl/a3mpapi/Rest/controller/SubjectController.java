@@ -33,7 +33,6 @@ public class SubjectController {
     @GetMapping("/all")
     public List<Subject> retrieveAllSubjects()
     {
-
         return repo.findAll();
     }
 

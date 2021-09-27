@@ -97,3 +97,180 @@ There are 4 id's "101,102,103,104"
 Have Fun :)
 
 
+# RESTful API (with SOAP)
+## How to run the service
+Running the RESTful API service A3MPAPIapplication class with the main method
+
+Alternatively you can run the Springboot initializer which should also be pointing at the main method
+
+It requires the PORT number 8060 and the H2 database should be up and running
+
+
+## Walkthrough of endpoints
+
+### IP Locator
+There is one endpoint which is a get endpoint. It is accessed through: 
+```
+localhost:8060/iplocator/{ip}
+```
+This endpoint return a string containing the country and state of the supplied IP address.
+It is implemented with a SOAP service.
+A return example for an IP address "79.142.224.239" could look like this:
+```
+DK17
+```
+
+### Subject
+#### GET - all
+The endpoint for this GET looks like below:
+```
+localhost:8060/subjects
+```
+This endpoint will return all the subjects available like below:
+```
+{
+  "_embedded" : {
+    "subjects" : [ {
+      "name" : "System Integration",
+      "classroom" : "2.62",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8060/subjects/1"
+        },
+        "subject" : {
+          "href" : "http://localhost:8060/subjects/1"
+        },
+        "students" : {
+          "href" : "http://localhost:8060/subjects/1/students"
+        }
+      }
+    }, {
+      "name" : "LSD",
+      "classroom" : "2.62",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8060/subjects/2"
+        },
+        "subject" : {
+          "href" : "http://localhost:8060/subjects/2"
+        },
+        "students" : {
+          "href" : "http://localhost:8060/subjects/2/students"
+        }
+      }
+    }, {
+      "name" : "Test",
+      "classroom" : "2.62",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8060/subjects/3"
+        },
+        "subject" : {
+          "href" : "http://localhost:8060/subjects/3"
+        },
+        "students" : {
+          "href" : "http://localhost:8060/subjects/3/students"
+        }
+      }
+    } ]
+  },
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8060/subjects"
+    },
+    "profile" : {
+      "href" : "http://localhost:8060/profile/subjects"
+    }
+  },
+  "page" : {
+    "size" : 20,
+    "totalElements" : 3,
+    "totalPages" : 1,
+    "number" : 0
+  }
+}
+```
+#### GET - Specific subject
+The endpoint for finding a specific subject is as below:
+```
+localhost:8060/subjects/{id}
+```
+Here you insert a valid ID, this can be either 1, 2 or 3
+
+The endpoint with an ID of 1 will return this:
+```
+{
+  "name" : "System Integration",
+  "classroom" : "2.62",
+  "_links" : {
+    "all-subjects" : {
+      "href" : "http://localhost:8060/subjects/all"
+    },
+    "self" : {
+      "href" : "http://localhost:8060/subjects/1"
+    }
+  }
+}
+```
+
+If an nonexisting ID is provided an error code NOT FOUND with status 404 will be thrown.
+
+#### DELETE - Specific subject
+For deleting a specific subject it is done as below in Postman:
+```
+localhost:8060/subjects/{id}
+```
+When providing an existing ID the subject will be deleted successfully and will return a status code 200.
+If a nonexisting ID is provided a status code 500 will be thrown.
+
+#### POST
+A subject is created in Postman through this endpoint:
+```
+localhost:8060/subjects/
+```
+An example for what could be created could be like this:
+```
+{
+    "classroom": "2.02",
+    "name": "Testing" 
+}
+```
+When creating a subject then a successful return will look like below and with a status code 200:
+```
+{
+    "name": "Testing",
+    "classroom": "2.02",
+    "_links": {
+        "self": {
+            "href": "http://localhost:8060/subjects/4"
+        },
+        "subject": {
+            "href": "http://localhost:8060/subjects/4"
+        },
+        "students": {
+            "href": "http://localhost:8060/subjects/4/students"
+        }
+    }
+}
+```
+
+An unsuccessful scenario will appear if you write a wrong name for a wrong field, this will throw a status code 400.
+
+#### PUT - Specific subject
+The endpoint for editing a specific subject looks like below:
+```
+localhost:8060/subjects/{id}
+```
+When editing a specific subject it is done in Postman with an existing ID. This could be 1, 2 or 3.
+
+An example for what could be edited for any subject with a correct ID looks like below:
+```
+{
+    "classroom": "2.62",
+    "name": "TestingEdit" 
+}
+```
+If a nonexisting ID is provided a status code 404 Not Found is thrown.
+
+### Student
+
