@@ -17,6 +17,7 @@ Daniel Grønbjerg - cph-dg55
 The services are implemented in separate projects.
 Thus each service has to be started individually on it's own port. The ports required is 8060, 8082 and 8099.
 Each service needs to be started individually.
+All the dependecies requiered to run the services are in the pom.xml file. therefore maven is needed to run the project.
 
 
 # SOAP server/client
